@@ -1,0 +1,51 @@
+
+###vp9 
+vp9_qsv
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v vp9_qsv "D:\addons\test\old\aa\s1.mp4"
+	[vp9_qsv @ 000001de93270340] Error initializing an internal MFX session: unsupported (-3)
+	Error initializing output stream 0:0 -- Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height
+	[aac @ 000001de92fa2680] Qavg: 6708.871
+	[aac @ 000001de92fa2680] 2 frames left in the queue on closing
+	Conversion failed!
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v vp9_qsv -b:v 1400K -speed 2 "D:\addons\test\old\aa\s1.mp4"
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v vp9_qsv -b:v 1400K -speed 2 -s:v 1920x1080 "D:\addons\test\old\aa\s1.mp4"
+
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v vp9_qsv -low_power 1 "D:\addons\test\old\aa\s1.mp4"
+	[vp9_qsv @ 00000283d7fd0340] Error initializing an internal MFX session: unsupported (-3)
+	Error initializing output stream 0:0 -- Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height
+	[aac @ 00000283d7de3c80] Qavg: 6708.871
+	[aac @ 00000283d7de3c80] 2 frames left in the queue on closing
+	Conversion failed!
+###av1
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v libsvtav1 "D:\addons\test\old\aa\s1.mp4"
+
+
+###hevc
+hevc_nvenc hevc_qsv
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v hevc_nvenc "D:\addons\test\old\aa\s1.mp4"
+	[hevc_nvenc @ 000001b1b6cd0340] Driver does not support the required nvenc API version. Required: 11.1 Found: 11.0
+	[hevc_nvenc @ 000001b1b6cd0340] The minimum required Nvidia driver for nvenc is 471.41 or newer
+	Error initializing output stream 0:0 -- Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height
+	[aac @ 000001b1b6ac05c0] Qavg: 6708.871
+	[aac @ 000001b1b6ac05c0] 2 frames left in the queue on closing
+	Conversion failed!
+
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -i "D:\addons\test\old\aa\s.mp4" -c:v hevc_qsv "D:\addons\test\old\aa\s1.mp4"
+	[hevc_qsv @ 0000029fa6990340] Error initializing an internal MFX session: unsupported (-3)
+	Error initializing output stream 0:0 -- Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height
+	[aac @ 0000029fa66c2680] Qavg: 6708.871
+	[aac @ 0000029fa66c2680] 2 frames left in the queue on closing
+	Conversion failed!
+
+###avc
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -init_hw_device qsv:hw -i "D:\addons\test\old\aa\s.mp4" -vf hwupload=extra_hw_frames=64，format=qsv -c:v h264_qsv -strict experimental -preset veryslow -c:a copy "D:\addons\test\old\aa\s1.mp4" -y
+	WARNING: defaulting child_device_type to AV_HWDEVICE_TYPE_DXVA2 for compatibility with old commandlines. This behaviour will be removed in the future. Please explicitly set device type via "-init_hw_device" option.
+	[AVHWDeviceContext @ 000001bff9c6b4c0] Error initializing an MFX session: -3.
+	Device creation failed: -1313558101.
+	Failed to set value 'qsv:hw' for option 'init_hw_device': Unknown error occurred
+	Error parsing global options: Unknown error occurred
+D:\pychram_project\youtube_download\ffmpeg\bin\ffmpeg -init_hw_device cuda:1 -i "D:\addons\test\old\aa\s.mp4" -vf hwupload=extra_hw_frames=64，format=qsv -c:v h264_qsv -strict experimental -preset veryslow -c:a copy "D:\addons\test\old\aa\s1.mp4" -y
+	[AVHWDeviceContext @ 000002396eaeb4c0] cu->cuDeviceGet(&hwctx->internal->cuda_device, device_idx) failed -> CUDA_ERROR_INVALID_DEVICE: invalid device ordinal
+	Device creation failed: -542398533.
+	Failed to set value 'cuda:1' for option 'init_hw_device': Generic error in an external library
+	Error parsing global options: Generic error in an external library

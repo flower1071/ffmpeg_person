@@ -1,0 +1,19 @@
+#ffmpeg使用方式
+-vcodec 指定视频编码器 #https://www.cnblogs.com/Hakurei-Reimu-Zh/p/14999269.html
+-c:a copy 复制音频流
+-strict
+-quality
+-speed
+-rc_lookahead
+-pass
+
+
+'''
+#https://blog.csdn.net/hyl999/article/details/112980883
+c:v libvpx-vp9 告诉FFmpeg在VP9中编码视频。
+c: libopus 告诉FFmpeg在Opus中编码音频。
+b:v 1000K 告诉FFmpeg将视频编码为1000kb的目标。
+b: 64k 告诉FFmpeg将音频编码为64kb的目标。
+'''
+
+ffmpeg -h encoder=vp9_qsv 查看编码器vp9_qsv的帮助
